@@ -93,8 +93,8 @@ public final class TankDrive {
         public double ramseteBBar = 2.0; // positive
 
         // turn controller gains
-        public double turnGain = 0.0;
-        public double turnVelGain = 0.0;
+        public double turnGain = 2.0;
+        public double turnVelGain = 0.1;
     }
 
     public static Params PARAMS = new Params();
