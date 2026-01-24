@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class BallSystem {
+public class BallQueue {
     private DcMotor intakeMotor;
     private final double INTAKE_SPEED = 1.0;
     private final int MAX_CAPACITY = 3;
