@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
-@Autonomous(name="Auto", group="Competition")
+@Autonomous(name="ZAUTO", group="Competition")
 public class Testauto extends LinearOpMode {
 
     private DcMotorEx intakeMotor;
@@ -18,9 +18,10 @@ public class Testauto extends LinearOpMode {
 
         Pose2d startPose = new Pose2d(-36, -60, Math.toRadians(90));
         Vector2d ganbuc = new Vector2d(-12, -12);
-        Vector2d gatbong = new Vector2d(-55, -12);
+        Vector2d gatbong = new Vector2d(-58, -12);
 
         MecanumDrive drive = new MecanumDrive(hardwareMap, startPose);
+
         intakeMotor = hardwareMap.get(DcMotorEx.class, "intake");
         shooterMotor = hardwareMap.get(DcMotorEx.class, "shooter");
 
@@ -36,7 +37,8 @@ public class Testauto extends LinearOpMode {
                         .stopAndAdd(() -> shootBalls())
                         .waitSeconds(0.5)
 
-                        .lineToX(-58)
+                        .setTangent(Math.toRadians(180))
+                        .lineToX(gatbong.x)
                         .waitSeconds(0.2)
                         .lineToX(-40)
 
@@ -45,19 +47,22 @@ public class Testauto extends LinearOpMode {
                         .setReversed(false)
                         .splineTo(ganbuc, Math.toRadians(45))
                         .stopAndAdd(() -> shootBalls())
+                        .waitSeconds(0.5)
 
-                        .lineToX(-58)
+                        .setTangent(Math.toRadians(180))
+                        .lineToX(gatbong.x)
                         .waitSeconds(0.2)
                         .lineToX(-40)
 
                         .splineTo(new Vector2d(36, -36), Math.toRadians(0))
+                        .stopAndAdd(() -> intakeMotor.setPower(0))
                         .build()
         );
     }
 
     void shootBalls() {
         shooterMotor.setPower(1.0);
-        sleep(800);
+        try { Thread.sleep(800); } catch (InterruptedException e) {}
         shooterMotor.setPower(0);
     }
 }
